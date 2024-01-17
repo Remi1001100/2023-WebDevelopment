@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+    <title> Ewha mat.zip </title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="01-0 detail.css">
+    <script src="00 archive.js"> </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="upper_site">
+        <a id="back" href="00 main.html"> < </a>
+        <img src="matzip.png" id="matzip-icon" height="30px">
+        <!--<h1> Ewha mat.zip </h1>-->
+        <h1> </h1>
+    </div>
+
+    <div id="page">
+        <img class="info_pic" src="kkai.jpg" width="100%">
+        <div id="content">
+            <div id="info">
+                <h2 id="name"> 까이 식당 </h2>
+                <div id="address"> 서울 서대문구 이화여대2가길 24 </div>
+                <p id="info_text">
+                    까이 식당은 동남아식으로 밥을 볶은 치킨 라이스만을 판매합니다. 통생강, 마늘, 피시 소스, 된장을 조합해 만든 특제 소스가 특별한 맛을 더해줍니다. 15시~17시 브레이크 타임입니다. 인스타그램: bistrogai
+                </p>
+            </div>
+            <br>
+            <hr>
+            <br>
+
+            <form id="menu">
+                <h3>Menu</h3>
+                <label><input type="radio" name="menu_list" value="치킨 라이스(보통)"> 치킨 라이스(보통) </label><br>
+                <label><input type="radio" name="menu_list" value="치킨 라이스(특)"> 치킨 라이스(특) </label><br>
+            </form>
+
+            <div id="review">
+                <h3>Review</h3>
+                <textarea id="memo" rows="5" cols="90" placeholder="여기에 리뷰를 작성해주세요."></textarea>
+            </div>
+        </div>
+
+        <div id="b_area">
+            <button onclick="save_review()" id="keepB"> Save </button>
+            <button onclick="load_review()" id="keepB"> Load </button>
+        </div>
+
+        <div id="previous">
+        </div>
+
+        <script>
+            var form = document.getElementById("menu");
+
+            var kkai_archive = [];
+            if(localStorage.getItem("kkai.re") != null){
+                var kkaire = localStorage.getItem("kkai.re");
+                kkai_archive = JSON.parse(kkaire);
+            }
+
+            function save_review(){
+                var me = document.getElementById("memo").value;
+                var m = form.elements.menu_list.value;
+                var d = new Date();
+                var date = String(d.getFullYear() + "년" + (d.getMonth()+1) + "월" + d.getDate() +"일");
+
+                kkai_archive.push({menu: m, review: me, date: date});
+                localStorage.setItem("kkai.re", JSON.stringify(kkai_archive));
+                
+                console.log(kkai_archive);
+            }
+
+            function load_review(){
+                if(localStorage.getItem("kkai.re") == null){
+                    document.getElementById("previous").innerHTML = "기록이 없습니다.";
+                }
+                else{
+                    document.getElementById("previous").innerHTML = " ";
+
+                    for(let i =0; i< kkai_archive.length; i++){
+                        document.getElementById("previous").innerHTML += (i+1) + ". " + kkai_archive[i].date + "<br> 이전 메뉴: <b>" + kkai_archive[i].menu + "</b><br>이전 기록: <b>" + kkai_archive[i].review + "</b><br><br>";
+                    }
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</htmL>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Ewha mat.zip </title>
+        <meta charset="UTF-8">
+        <script src="00 list.js"> </script>
+        <link rel="stylesheet" href="02 mypage.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    </head>
+    <body onload="load_archive()">
+        <div id="content">
+            <div id="upper_site">
+                <a id="back" href="00 main.html"> < </a>
+                <img src="matzip.png" id="matzip-icon" height="30px">
+                <h1> </h1>
+            </div>
+
+            <div id="listarea">
+
+            </div>
+
+        </div>
+
+
+        <script>
+            var originrestaurants = [];
+            for(let i = 0; i<restaurants.length; i++){
+                originrestaurants.push(restaurants[i]);
+            }
+            
+            function load_archive(){
+                for(let i =0; i<originrestaurants.length; i++){
+                document.getElementById("listarea").innerHTML += "<h3>" + restaurants[i].name + "</h3>";
+                var Re = localStorage.getItem(String(restaurants[i].tag) + ".re");
+                Re_archive = JSON.parse(Re);
+                if(Re_archive == null){
+                    document.getElementById("listarea").innerHTML += "기록이 없습니다.<br><br>";
+                }
+                else{
+                    for(let j = 0; j<Re_archive.length;j++){
+                        document.getElementById("listarea").innerHTML += "<div id='datestyle'>" + Re_archive[j].date + "</div> 이전 메뉴: <b>" + Re_archive[j].menu + "</b><br>이전 기록: <b>" + Re_archive[j].review + "</b><br><br>";
+                    }
+                }
+            }
+
+            }
+
+        </script>
+    </body>
+</html>

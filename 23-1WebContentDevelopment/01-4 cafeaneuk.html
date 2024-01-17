@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+    <title> Ewha mat.zip </title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="01-0 detail.css">
+    <script src="00 archive.js"> </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="upper_site">
+        <a id="back" href="00 main.html"> < </a>
+        <img src="matzip.png" id="matzip-icon" height="30px">
+        <h1> </h1>
+    </div>
+
+    <div id="page">
+        <img class="info_pic" src="cafeaneuk.jpg" width="100%">
+        <div id="content">
+            <div id="info">
+                <h2 id="name"> 카페 아늑 </h2>
+                <div id="address"> 서울 서대문구 이화여대7길 27 1층 </div>
+                <p id="info_text">
+                    카페아늑은 골목에 위치한 작고 아늑한 카페입니다. 테이크아웃 시 1700원이 할인됩니다. 인스타그램:@cafeaneuk
+                </p>
+            </div>
+            <br><br>
+
+            <form id="menu">
+                <h3>Menu</h3>
+                <label><input type="radio" name="menu_list" value="아인슈페너"> 아인슈페너 </label><br>
+                <label><input type="radio" name="menu_list" value="청포도에이드"> 청포도에이드 </label><br>
+                <label><input type="radio" name="menu_list" value="더치큐브라떼"> 더치큐브라떼 </label><br>
+                <label><input type="radio" name="menu_list" value="아이스크림초코라떼"> 아이스크림초코라떼 </label><br>
+                <label><input type="radio" name="menu_list" value="아이스크림녹차라떼"> 아이스크림녹차라떼 </label><br>
+            </form>
+
+            <div id="review">
+                <h3>Review</h3>
+                <textarea id="memo" rows="5" cols="90" placeholder="여기에 리뷰를 작성해주세요."></textarea>
+            </div>
+            
+        </div>
+
+        <div id="b_area">
+            <button onclick="save_review()" id="keepB"> Save </button>
+            <button onclick="load_review()" id="keepB"> Load </button>
+        </div>
+
+        <div id="previous">
+        </div>
+
+        <script>
+            var form = document.getElementById("menu");
+
+            var aneuk_archive = [];
+            if(localStorage.getItem("aneuk.re") != null){
+                var aneukre = localStorage.getItem("aneuk.re");
+                aneuk_archive = JSON.parse(aneukre);
+            }
+
+            function save_review(){
+                var me = document.getElementById("memo").value;
+                var m = form.elements.menu_list.value;
+                var d = new Date();
+                var date = String(d.getFullYear() + "년" + (d.getMonth()+1) + "월" + d.getDate() +"일");
+
+                aneuk_archive.push({menu: m, review: me, date: date});
+                localStorage.setItem("aneuk.re", JSON.stringify(aneuk_archive));
+                
+                console.log(aneuk_archive);
+            }
+
+            function load_review(){
+                if(localStorage.getItem("aneuk.re") == null){
+                    document.getElementById("previous").innerHTML = "기록이 없습니다.";
+                }
+                else{
+                    var aneukre = localStorage.getItem("aneuk.re");
+                    aneuk_archive = JSON.parse(aneukre);
+                    document.getElementById("previous").innerHTML = " ";
+
+                    for(let i =0; i< aneuk_archive.length; i++){
+                        document.getElementById("previous").innerHTML += (i+1) + ". " + aneuk_archive[i].date + "<br> 이전 메뉴: <b>" + aneuk_archive[i].menu + "</b><br>이전 기록: <b>" + aneuk_archive[i].review + "</b><br><br>";
+                    }
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</htmL>

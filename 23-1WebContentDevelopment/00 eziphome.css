@@ -1,0 +1,108 @@
+body{
+    padding: 20px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+#mypage{
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+}
+
+#matzip-icon{
+    margin-top: 50px;
+    display: block;
+    margin: 0px auto;
+}
+
+h1{
+    text-align: center;
+    color: #00462a;
+}
+
+#search-area{
+    text-align: center;
+    padding: 0 auto;
+}
+
+#search-input{
+    width: 500px;
+    height: 40px;
+    border-radius: 7px;
+}
+#gosearch{
+    height: 45px;
+    width: 45px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    color: #e1eef6;
+    background-color: #00462a;
+}
+#gosearch:hover{
+    cursor: pointer;
+}
+
+#filter{
+    position: relative;
+    padding: 7px 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+    border: 3px solid #00462a;
+    color: rgb(107, 107, 107);
+}
+
+#filter:hover {
+    letter-spacing: 2px;
+    transform: scale(1.05);
+    cursor: pointer;
+    background-color: #00462a;
+    color: #e1eef6;
+}
+
+#list-area{
+    padding: 50px;
+}
+
+#show{
+    color: inherit;
+    text-decoration: none;
+    background-color: rgb(214, 214, 214, 0.5);
+    margin-bottom: 10px;
+
+    border-radius: 7px;
+    height: 30px;
+    font-weight: bold;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    transition: 0.25s;
+}
+
+#show:hover {
+    color: #00462a;
+    background-color: #c2dac3;
+    transform: scale(1.05);
+}
+
+
+@media(max-width:768px){
+    body{padding: 20px; margin: 0 auto;}
+    #search-input{width: 80%; height: 50px;}
+    #gosearch{height: 50px;}
+    #list-area{padding: 20px;}
+    #show{
+        height: 40px;
+        font-weight: bold;
+        font-size: 20px;
+        padding-left: 10px;
+        display: flex;
+        align-items: center;
+    }
+    #filter{padding: 5px 10px;}    
+}

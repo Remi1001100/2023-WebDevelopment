@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+    <title> Ewha mat.zip </title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="01-0 detail.css">
+    <script src="00 archive.js"> </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="upper_site">
+        <a id="back" href="00 main.html"> < </a>
+        <img src="matzip.png" id="matzip-icon" height="30px">
+        <h1> </h1>
+    </div>
+
+    <div id="page">
+        <img class="info_pic" src="homilbat.jpg" width="100%">
+        <div id="content">
+            <div id="info">
+                <h2 id="name"> 호밀밭 </h2>
+                <div id="address"> 서울 서대문구 신촌역로 43 1층 </div>
+                <p id="info_text">
+                    호밀밭은 우유 얼음에 팥과 떡이 더해진 기본 밀크 빙수부터, 각종 토핑을 더한 다양한 빙수를 판매합니다. 22시까지 영업합니다. 
+                </p>
+            </div>
+            <br>
+            <hr>
+            <br>
+
+            <form id="menu">
+                <h3>Menu</h3>
+                <label><input type="radio" name="menu_list" value="밀크빙수"> 밀크빙수 </label><br>
+                <label><input type="radio" name="menu_list" value="녹차빙수"> 녹차빙수 </label><br>
+                <label><input type="radio" name="menu_list" value="커피빙수"> 커피빙수 </label><br>
+                <label><input type="radio" name="menu_list" value="초코빙수"> 초코빙수 </label><br>
+                <label><input type="radio" name="menu_list" value="오곡빙수"> 오곡빙수 </label><br>
+            </form>
+
+            <div id="review">
+                <h3>Review</h3>
+                <textarea id="memo" rows="5" cols="90" placeholder="여기에 리뷰를 작성해주세요."></textarea>
+            </div>
+            
+        </div>
+
+        <div id="b_area">
+            <button onclick="save_review()" id="keepB"> Save </button>
+            <button onclick="load_review()" id="keepB"> Load </button>
+        </div>
+
+        <div id="previous">
+        </div>
+
+        <script>
+            var form = document.getElementById("menu");
+
+            var homil_archive = [];
+            if(localStorage.getItem("homil.re") != null){
+                var homilre = localStorage.getItem("homil.re");
+                homil_archive = JSON.parse(homilre);
+            }
+
+            function save_review(){
+                var me = document.getElementById("memo").value;
+                var m = form.elements.menu_list.value;
+                var d = new Date();
+                var date = String(d.getFullYear() + "년" + (d.getMonth()+1) + "월" + d.getDate() +"일");
+
+                homil_archive.push({menu: m, review: me, date: date});
+                localStorage.setItem("homil.re", JSON.stringify(homil_archive));
+                
+                console.log(homil_archive);
+            }
+
+            function load_review(){
+                if(localStorage.getItem("homil.re") == null){
+                    document.getElementById("previous").innerHTML = "기록이 없습니다.";
+                }
+                else{
+                    var homilre = localStorage.getItem("homil.re");
+                    homil_archive = JSON.parse(homilre);
+                    document.getElementById("previous").innerHTML = " ";
+
+                    for(let i =0; i< homil_archive.length; i++){
+                        document.getElementById("previous").innerHTML += (i+1) + ". " + homil_archive[i].date + "<br> 이전 메뉴: <b>" + homil_archive[i].menu + "</b><br>이전 기록: <b>" + homil_archive[i].review + "</b><br><br>";
+                    }
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</htmL>

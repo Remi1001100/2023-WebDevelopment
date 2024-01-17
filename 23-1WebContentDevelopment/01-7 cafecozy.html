@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<htmL>
+
+<head>
+    <title> Ewha mat.zip </title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="01-0 detail.css">
+    <script src="00 archive.js"> </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="upper_site">
+        <a id="back" href="00 main.html"> < </a>
+        <img src="matzip.png" id="matzip-icon" height="30px">
+        <h1> </h1>
+    </div>
+
+    <div id="page">
+        <img class="info_pic" src="cafecozy.jpg" width="100%">
+        <div id="content">
+            <div id="info">
+                <h2 id="name"> 카페 코지 </h2>
+                <div id="address"> 서울 서대문구 이화여대길 88-19 </div>
+                <p id="info_text">
+                    카페코지는 정문 앞 골목에 위치한 작은 카페입니다. 코코넛의 대중화를 목표로 도전하는 카페의 시그니처 메뉴에 도전해보세요. 인스타그램: @caphecozy
+                </p>
+            </div>
+            <br>
+            <hr>
+            <br>
+
+            <form id="menu">
+                <h3>Menu</h3>
+                <label><input type="radio" name="menu_list" value="호치민라떼"> 호치민라떼 </label><br>
+                <label><input type="radio" name="menu_list" value="코코넛커피스무디"> 코코넛커피스무디 </label><br>
+                <label><input type="radio" name="menu_list" value="코코넛녹차스무디"> 코코넛녹차스무디 </label><br>
+                <label><input type="radio" name="menu_list" value="다낭라떼"> 다낭라떼 </label><br>
+                <label><input type="radio" name="menu_list" value="아메리카노"> 아메리카노 </label><br>
+            </form>
+
+            <div id="review">
+                <h3>Review</h3>
+                <textarea id="memo" rows="5" cols="90" placeholder="여기에 리뷰를 작성해주세요."></textarea>
+            </div>
+            
+        </div>
+
+        <div id="b_area">
+            <button onclick="save_review()" id="keepB"> Save </button>
+            <button onclick="load_review()" id="keepB"> Load </button>
+        </div>
+
+        <div id="previous">
+        </div>
+        <script>
+            var form = document.getElementById("menu");
+
+            var cozy_archive = [];
+            if(localStorage.getItem("cozy.re") != null){
+                var cozyre = localStorage.getItem("cozy.re");
+                cozy_archive = JSON.parse(cozyre);
+            }
+
+            function save_review(){
+                var me = document.getElementById("memo").value;
+                var m = form.elements.menu_list.value;
+                var d = new Date();
+                var date = String(d.getFullYear() + "년" + (d.getMonth()+1) + "월" + d.getDate() +"일");
+
+                cozy_archive.push({menu: m, review: me, date: date});
+                localStorage.setItem("cozy.re", JSON.stringify(cozy_archive));
+                
+                console.log(cozy_archive);
+            }
+
+            function load_review(){
+                if(localStorage.getItem("cozy.re") == null){
+                    document.getElementById("previous").innerHTML = "기록이 없습니다.";
+                }
+                else{
+                    var cozyre = localStorage.getItem("cozy.re");
+                    cozy_archive = JSON.parse(cozyre);
+                    document.getElementById("previous").innerHTML = " ";
+
+                    for(let i =0; i< cozy_archive.length; i++){
+                        document.getElementById("previous").innerHTML += (i+1) + ". " + cozy_archive[i].date + "<br> 이전 메뉴: <b>" + cozy_archive[i].menu + "</b><br>이전 기록: <b>" + cozy_archive[i].review + "</b><br><br>";
+                    }
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</htmL>

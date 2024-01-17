@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Ewha mat.zip </title>
+        <meta charset="UTF-8">
+        <script src="00 list.js"> </script>
+        <link rel="stylesheet" href="00 eziphome.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    </head>
+    <body onload="loadlist()">
+        <!--<h1> Ewha mat.zip </h1>-->
+        <div>
+            <a id="mypage" href="02 mypage.html"> MY </a>
+        </div>
+        <img src="matzip.png" id="matzip-icon" height="40px">
+
+        <div id="search-area">
+            <input type="text" id="search-input" placeholder="식당 이름을 검색하세요(띄어쓰기X)">
+            <button onclick="gosearch()" id="gosearch"> Go </button>
+            <br> <br> 
+            <button onclick="seeall()" id="filter"> 전체 보기 </button>
+            <button onclick="mealfilter()" id="filter"> 식사만 </button>
+            <button onclick="dessertfilter()" id="filter"> 카페만 </button>
+        </div>
+        <br>
+
+        <div id="list-area">
+
+        </div>
+        
+        <script>
+            var originrestaurants = [];
+            for(let i = 0; i<restaurants.length; i++){
+                originrestaurants.push(restaurants[i]);
+            }
+            console.log(originrestaurants);
+
+            var filtered_list = [];
+
+            function loadlist(){
+                for(let i=0; i<originrestaurants.length; i++){
+                    document.getElementById("list-area").innerHTML += "<a href='" + originrestaurants[i].link + "' id=show>" + originrestaurants[i].name + "</a>";
+                }
+            }
+            function printlist(){
+                document.getElementById("list-area").innerHTML ="";
+                for(let i = 0; i<filtered_list.length; i++){
+                    document.getElementById("list-area").innerHTML += "<a href='" + filtered_list[i].link + "' id=show>" + filtered_list[i].name + "</a>" ;
+                }
+            }
+
+
+            function erasearray(){
+                filtered_list = [];
+            }
+
+            function gosearch(){
+                erasearray();
+                let searchinput = document.getElementById("search-input").value;
+                for(let i = 0; i < originrestaurants.length; i++){
+                    if(originrestaurants[i].name.indexOf(searchinput) != -1){
+                        filtered_list.push(originrestaurants[i]);
+                    }
+                    printlist();
+                }
+
+            }
+
+            function mealfilter(){
+                erasearray();
+                for(let i=0; i<originrestaurants.length; i++){
+                    if(originrestaurants[i].type == "meal"){
+                        filtered_list.push(originrestaurants[i]);
+                    }
+                }
+                printlist();
+
+            }
+
+            function dessertfilter(){
+                erasearray();
+                for(let i=0; i<originrestaurants.length; i++){
+                    if(originrestaurants[i].type == "dessert"){
+                        filtered_list.push(originrestaurants[i]);
+                    }
+
+                }
+                printlist();
+
+
+            }
+            
+            function seeall(){
+                document.getElementById("list-area").innerHTML ="";
+                loadlist();
+            }
+
+        </script>
+
+    </body>
+</html>
