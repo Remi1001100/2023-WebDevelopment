@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@500;600;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="y2kstyle.css">
+        <script type="text/javascript" src="hobbyscript.js"></script>
+        <title> gallery </title>
+        <style>
+            #pictures{
+                display: grid;
+                grid-template-columns: auto auto auto;
+            }
+            #count{
+                display: grid;
+                grid-template-columns: 80% 20%;
+                align-items: center;
+                padding-left: 10%;
+            }
+            #img_buttons{
+                float: right;
+            }
+            
+            #img_buttons button{
+                background-color: #1634CC;
+                color: #d9d9d9;
+            }
+
+            #image_area img{
+                display: block;
+                margin: 0 auto;
+                align-items: center;
+            }
+            #count h3{
+                color: #222222;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+            }
+            #thumbnail{
+                display: grid;
+                grid-template-columns: auto auto auto;
+                align-items: center;
+                padding-left: 30%;
+                padding-right: 30%;
+            }
+            #notnow {
+                filter: grayscale(100%)
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+        <div id="Page">
+            <div id="count">
+                <h3 id="imgnum"> 1 / 15 </h3>
+                <div id="img_buttons"> 
+                    <button onclick="prev()"> < </button>
+                    <button onclick="next()"> > </button>
+                </div>
+            </div>
+
+            <div id="image_area">
+                <img src="pictures/sw1.jpg" width="80%">
+            </div>
+            <br>
+
+            <div id="thumbnail">
+                <img src="pictures/sw1.jpg" width="95%">
+                <img src="pictures/sw2.jpg" width="95%"  id="notnow">
+                <img src="pictures/sw3.jpg" width="95%"  id="notnow">
+            </div>
+            <br>
+
+        </div>
+
+        <div id="footer">
+            <h5>
+                <span> Made by Remi Ku, 2023 </span> <br>
+                <span> jk618@sussex.ac.kr </span> <br>
+            </h5>
+        </div>
+
+    </body>
+</html>

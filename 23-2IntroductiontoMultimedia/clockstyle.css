@@ -1,0 +1,43 @@
+#clock {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    margin: 20px auto 0 auto;
+    background: url(images/clockface.png);
+    background-repeat: no-repeat;
+    list-style: none;
+}
+
+#sec, #min, #hour {
+    position: absolute;
+    width: 30px;
+    height: 600px;
+    top: 0px;
+    left: 285px;
+}
+
+#sec{
+    background: url(images/secondshand.png);
+    z-index:3;
+}
+
+#min{
+    background: url(images/minhand.png);
+    z-index: 2;
+}
+
+#hour{
+    background: url(images/hourhand.png);
+    z-index: 1;
+}
+
+#clock_digital{
+    text-align: center;
+    color: #222222;
+    font-size: 40px;
+    font-family: 'Bebas Neue', sans-serif;
+
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
